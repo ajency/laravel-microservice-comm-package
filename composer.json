@@ -1,0 +1,18 @@
+{
+    "name": "ajency/service_comm",
+    "require": {
+        "elasticsearch/elasticsearch": "^6.0",
+        "guzzlehttp/guzzle": "^6.0"
+    },
+    "authors": [{
+        "name": "Shashank Shetye Saudagar",
+        "email": "shashank@ajency.in"
+    }],
+    "extra": {
+        "laravel": {
+            "providers": ["Ajency\\ServiceComm\\ServiceCommServiceProvider"]
+            
+        }
+    },
+    "minimum-stability": "dev"
+}
