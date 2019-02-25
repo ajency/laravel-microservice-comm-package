@@ -8,11 +8,22 @@
         "name": "Shashank Shetye Saudagar",
         "email": "shashank@ajency.in"
     }],
+    "autoload": {
+        "psr-4": {
+            "Ajency\\Comm\\": "src/"
+
+        }
+    },
     "extra": {
         "laravel": {
             "providers": ["Ajency\\ServiceComm\\ServiceCommServiceProvider"]
             
         }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "src/Comm/"
+        ]
     },
     "minimum-stability": "dev"
 }

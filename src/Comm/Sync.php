@@ -1,10 +1,10 @@
 <?php
 
-namespace Ajency\Comm;
+namespace Ajency\ServiceComm\Comm;
 
 use GuzzleHttp\Client;
 
-class Sync
+class Sync 
 {
     public static function call($microservice, $method, $params)
     {
@@ -16,5 +16,16 @@ class Sync
                 'params' => $params
             ],
         ]);
+        return json_decode($result->getBody());
+    }
+
+    public static function listen($method,$params){
+        //authorization code here
+
+        $functionDetails = config('service_comm.mapping.'.$method);
+        if(is_null($functionDetails)) throw new \Exception("Undefined method {$method}", 1);
+        
+        return $functionDetails['model']::$functionDetails['function']($params);
+        
     }
 }

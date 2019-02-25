@@ -14,7 +14,7 @@ class ServiceCommServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-           
+            __DIR__ . '/config/service_comm.php' => config_path('service_comm.php'),
         ], 'config');
     }
 
