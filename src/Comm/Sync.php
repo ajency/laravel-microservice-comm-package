@@ -9,7 +9,7 @@ class Sync
     public static function call($microservice, $method, $params)
     {
         
-        $client = new Client(config('service_comm.url.'$microservice) ); 
+        $client = new Client(['base_uri' => config('service_comm.url.'.$microservice) ]); 
         $result = $client->request('POST','service_comm/listen',  [
             'json' => [
                 'method' => $method,
