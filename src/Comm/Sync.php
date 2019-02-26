@@ -16,6 +16,7 @@ class Sync
             'json' => [
                 'method' => $method,
                 'params' => $params,
+                'auth' => config('service_comm.auth_token'),
             ],
         ]);
         Log::notice('Call to ' . $microservice . ' method=' . $method . 'with params ' . json_encode($params) . 'took time ' . round(microtime(true) - $start, 3) . ' seconds and resulted in ' . $result->getBody());
@@ -25,6 +26,8 @@ class Sync
     public static function listen($method, $params)
     {
         //authorization code here
+
+
         $functionDetails = config('service_comm.mapping.' . $method);
         if (is_null($functionDetails)) {
             throw new \Exception("Undefined method {$method}", 1);

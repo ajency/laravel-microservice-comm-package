@@ -1,6 +1,7 @@
 <?php
 
 return [
+	'auth_token' => env("SERVICE_COMM_AUTH",""),
 	'url' => [
 		'service_name' => 'service_url'
 	],
