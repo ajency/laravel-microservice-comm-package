@@ -4,6 +4,7 @@ namespace Ajency\ServiceComm\Comm;
 
 use GuzzleHttp\Client;
 use Log;
+use Exception;
 
 class Sync
 {
@@ -19,7 +20,9 @@ class Sync
                 'auth' => config('service_comm.auth_token'),
             ],
         ]);
-        Log::notice('Call to ' . $microservice . ' method=' . $method . 'with params ' . json_encode($params) . 'took time ' . round(microtime(true) - $start, 3) . ' seconds and resulted in ' . $result->getBody());
+        $message = 'Call to ' . $microservice . ' method=' . $method . 'with params ' . json_encode($params) . 'took time ' . round(microtime(true) - $start, 3) . ' seconds and resulted in status '.$result->getStatusCode().' content' . $result->getBody();
+        Log::notice($message);
+        if(200 != $result->getStatusCode()) throw new Exception($messsage);
         return json_decode($result->getBody(), true);
     }
 
