@@ -3,22 +3,15 @@
 ### Install packages
 `Add the repository to composer.json & run "composer update"`
 ```
-private $openRoutes = ['service_comm/listen'];
-    /**
-     * Indicates whether the XSRF-TOKEN cookie should be set on the response.
-     *
-     * @var bool
-     */
-    protected $addHttpCookie = true;
-
-    /**
-     * The URIs that should be excluded from CSRF verification.
-     *
-     * @var array
-     */
-    protected $except = [
-        'service_comm/listen'
-    ];
+"repositories": [
+    {
+        "type": "git",
+        "url": "https://github.com/ajency/laravel-microservice-comm-package.git"
+    }
+],
+"require": {
+    "ajency/service_comm": "dev-master"
+}
 ```
 
 ### Config File
