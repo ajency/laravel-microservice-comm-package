@@ -130,6 +130,6 @@ class SNS
     		'Message' => json_encode($payload),
     		'TopicArn' => $this->getTopic($topic)['arn'],
     	]);
-    }
+    }   
 
 }
