@@ -21,6 +21,6 @@ return [
 			'region'=> env('AWS_REGION'),
 			'version' => 'latest'
 		],
-		
+		'prefix' => str_slug(env(APP_ENV))
 	],
 ];
