@@ -48,6 +48,15 @@ class SNS
     }
 
     /**
+     * @return array topics
+     * @author Shashank Shetye Saudagar
+     **/
+    function getTopics()
+    {
+    	return $this->topics;
+    }
+
+    /**
      *    Return topics with their ARN
      *
      * @return array $topics
@@ -90,5 +99,24 @@ class SNS
     	}
     	return $this->topics[$topic];
     }
+
+    /**
+     * Create an SNS topic
+     * @param string topic
+     * @return create topic response
+     * @author Shashank Shetye Saudagar
+     **/
+    public function createTopic($topic){
+    	if(!array_key_exists($topic, $this->topics)){
+    		throw new \InvalidArgumentException('Topic not in configuration');
+    	}
+    	$result = $this->getClient()->createTopic([
+    		'Name' => $this->getTopic($topic)['name'],
+    	]);
+
+    	return $result;
+    }
+
+
 
 }
