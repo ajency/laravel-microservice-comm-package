@@ -117,6 +117,19 @@ class SNS
     	return $result;
     }
 
-
+    /**
+     * Publish a message to a topic
+     * @param string topic - topic to which the message has to be published to
+     * @param array payload - Payload of the publish message 
+     * @return void
+     * @author Shashank Shetye Saudagar
+     **/
+    public function publish($topic,$payload)
+    {
+    	$this->getClient()->publish([
+    		'Message' => json_encode($payload),
+    		'TopicArn' => $this->getTopic($topic)['arn'],
+    	]);
+    }
 
 }
