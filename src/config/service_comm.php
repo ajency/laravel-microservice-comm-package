@@ -11,4 +11,16 @@ return [
 			'function' => 'function_name',
 		],
 	],
+	'sns' => [
+		'client' => [
+			'id' => env('AWS_ACCOUNT_ID'),
+			'credentials' => [
+				'key' => env('AWS_ACCESS_KEY'),
+				'secret' => env('AWS_ACCESS_SECRET')
+			],
+			'region'=> env('AWS_REGION'),
+			'version' => 'latest'
+		],
+		
+	],
 ];

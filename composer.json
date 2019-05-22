@@ -2,7 +2,8 @@
     "name": "ajency/service_comm",
     "require": {
         "elasticsearch/elasticsearch": "^6.0",
-        "guzzlehttp/guzzle": "^6.0"
+        "guzzlehttp/guzzle": "^6.0",
+        "aws/aws-sdk-php": "^3.0.0"
     },
     "authors": [{
         "name": "Shashank Shetye Saudagar",
