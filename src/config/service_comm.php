@@ -11,6 +11,7 @@ return [
 			'function' => 'function_name',
 		],
 	],
+	'async_provider' => 'sns',
 	'sns' => [
 		'client' => [
 			'id' => env('AWS_ACCOUNT_ID'),
@@ -21,6 +22,7 @@ return [
 			'region'=> env('AWS_REGION'),
 			'version' => 'latest'
 		],
-		'prefix' => str_slug(env(APP_ENV))
+		'prefix' => str_slug(env(APP_ENV)),
+		'topics' => [],
 	],
 ];
