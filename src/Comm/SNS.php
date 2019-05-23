@@ -127,10 +127,27 @@ class SNS
      **/
     public function publish($topic,$payload)
     {
-    	$this->getClient()->publish([
-    		'Message' => serialize($payload),
+    	return $this->getClient()->publish([
+    		'Message' => json_encode($payload),
     		'TopicArn' => $this->getTopic($topic)['arn'],
+            'Subject' => $topic,
     	]);
+    } 
+
+    /**
+     * Publish a message to a topic using promises
+     * @param string topic - topic to which the message has to be published to
+     * @param array payload - Payload of the publish message 
+     * @return void
+     * @author Shashank Shetye Saudagar
+     **/
+    public function publishAsync($topic,$payload)
+    {
+        return $this->getClient()->publishAsync([
+            'Message' => json_encode($payload),
+            'TopicArn' => $this->getTopic($topic)['arn'],
+            'Subject' => $topic,
+        ]);
     } 
 
     public static function createInstance (){
