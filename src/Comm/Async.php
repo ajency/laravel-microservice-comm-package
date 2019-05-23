@@ -9,7 +9,7 @@ use Log;
  * @package ServiceComm
  * @author Shashank Shetye Saudagar
  **/
-class 
+class Async
 {
 	/**
 	 * Do an async call to a provider
@@ -19,8 +19,11 @@ class
 	 * @return void | guzzle promise
 	 * @author Shashank Shetye Saudagar
 	 **/
-	public static function call($topic,$payload,$provider = config('service_comm.async_provider'), $returnPromise = true)
+	public static function call($topic,$payload,$provider = null, $returnPromise = true)
 	{
+		if(is_null($provider)){
+			$provider = config('service_comm.async_provider');
+		}
 		Log::notice('Publishing to ' . $topic . ' with ' . $provider);
 		switch ($provider) {
 			case 'sns':
