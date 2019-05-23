@@ -76,13 +76,14 @@ class SNS
                 if (!empty(config('service_comm.sns.prefix'))) {
                     $name = config('service_comm.sns.prefix') . "-" . $name;
                 }
-                $value = 'arn:aws:sns:' . $this->client['region'] . ":" . $name;
+                $value = 'arn:aws:sns:' . config('service_comm.sns.client.region') .":".config('service_comm.sns.client.id'). ":" . $name;
             }
+            $arr = explode(":", $value);
             $value = [
-                'name' => end(explode(":", $value)),
+                'name' => end($arr),
                 'arn'  => $value,
             ];
-            $output[$key] => $value;
+            $output[$key] = $value;
         }
         return $output;
     }
@@ -127,9 +128,15 @@ class SNS
     public function publish($topic,$payload)
     {
     	$this->getClient()->publish([
-    		'Message' => json_encode($payload),
+    		'Message' => serialize($payload),
     		'TopicArn' => $this->getTopic($topic)['arn'],
     	]);
-    }   
+    } 
+
+    public static function createInstance (){
+        $client = new SnsClient(config('service_comm.sns.client'));
+        return new self($client);
+    }  
+
 
 }

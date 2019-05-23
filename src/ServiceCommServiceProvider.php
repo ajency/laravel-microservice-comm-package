@@ -5,6 +5,7 @@ namespace Ajency\ServiceComm;
 use Illuminate\Support\ServiceProvider;
 use Aws\Sns\SnsClient;
 use Ajency\ServiceComm\Comm\SNS;
+use Ajency\ServiceComm\Commands\Create;
 
 class ServiceCommServiceProvider extends ServiceProvider
 {
@@ -26,6 +27,12 @@ class ServiceCommServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/config/service_comm.php' => config_path('service_comm.php'),
         ], 'config');
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                Create::class,
+            ]);
+        }
     }
 
     /**
