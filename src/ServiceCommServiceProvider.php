@@ -32,18 +32,18 @@ class ServiceCommServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(SnsClient::class, function ($app, $config){
-            return new SnsClient(config('service_comm.sns.client'));
-        });
+        // $this->app->singleton(SnsClient::class, function ($app, $config){
+        //     return new SnsClient(config('service_comm.sns.client'));
+        // });
 
-        $this->app->singleton(SNS::class, function ($app, $config) {
-            return new SNS($app[SnsClient::class]);
-        });
+        // $this->app->singleton(SNS::class, function ($app, $config) {
+        //     return new SNS($app[SnsClient::class]);
+        // });
 
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                Create::class,
-            ]);
-        }
+        // if ($this->app->runningInConsole()) {
+        //     $this->commands([
+        //         Create::class,
+        //     ]);
+        // }
     }
 }
