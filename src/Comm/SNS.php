@@ -3,6 +3,7 @@
 namespace Ajency\ServiceComm\Comm;
 
 use Aws\Sns\SnsClient;
+use GuzzleHttp\Client;
 
 /**
  * Communication class to maintain SNS topics and publish to them
@@ -160,7 +161,8 @@ class SNS
             $cred['credentials'] = [
                 //check response
                 'key' => $credentials['AccessKeyId'],
-                'secret' => $result['SecretAccessKey']
+                'secret' => $credentials['SecretAccessKey'],
+                'token' => $credentials['Token']
             ];
         }
         $client = new SnsClient($cred);
