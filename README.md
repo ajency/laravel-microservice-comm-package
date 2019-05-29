@@ -1,5 +1,5 @@
 # laravel-microservice-comm-package
-
+## Sync API calls to Microservices
 ### Install packages
 `Add the repository to composer.json & run "composer update"`
 ```
@@ -36,3 +36,36 @@ protected $except = [
     'service_comm/listen'
 ];
 ```
+## Async calls to services like AWS SNS
+
+### Config changes
+Add the Topics to the `service_comm.php` config file. If the topic is not added to the config, the package will throw an error while processing that topic.
+> 'topics' => ['OrderCreated', 'OrderUpdated','SignUp']
+
+### Create a topic
+To create a topic, create an instance of the SNS class with the static method `createInstance`
+```php
+use Ajency\ServiceComm\Comm\SNS;
+$sns = SNS::createInstance();
+$sns->createTopic('OrderCreated')
+```
+
+### Publish to a topic
+To publish to a topic call static method `call` from `Async` Class, this returns a promise which is resolved to an `AWSResult` object
+```php
+use Ajency\ServiceComm\Comm\Async;
+$promise = Async::call('OrderCreated',['id'=>2, 'name'=> 'ABC']);
+$result = $promise->wait();
+```
+We can also publish to AWS Simple Notification Service without using Promises
+```php
+use Ajency\ServiceComm\Comm\Async;
+$result = Async::call('OrderCreated',['id'=>2, 'name'=> 'ABC'],'sns',false);
+```
+## Read a SNS notification from the subscribed queue in SQS
+This package implements the [AWS SQS SNS Subscription Queue](https://github.com/joblocal/laravel-sqs-sns-subscription-queue) package. Please refer the readme [here](https://github.com/joblocal/laravel-sqs-sns-subscription-queue/blob/master/readme.md)
+
+
+## Using IAM Role in an EC2 instance
+If using IAM role in an EC2 instance, open `config/service_comm.php` and set the `credentials` to `false`
+Add the aws role to the config

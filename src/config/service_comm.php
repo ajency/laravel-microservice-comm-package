@@ -11,4 +11,19 @@ return [
 			'function' => 'function_name',
 		],
 	],
+	'async_provider' => 'sns',
+	'sns' => [
+		'client' => [
+			'id' => env('AWS_ACCOUNT_ID'),
+			'credentials' => [
+				'key' => env('AWS_ACCESS_KEY'),
+				'secret' => env('AWS_ACCESS_SECRET')
+			],
+			'region'=> env('AWS_REGION'),
+			'version' => 'latest'
+		],
+		'aws_role' => env('AWS_ROLE'),
+		'prefix' => str_slug(env('APP_ENV')),
+		'topics' => [],
+	],
 ];
