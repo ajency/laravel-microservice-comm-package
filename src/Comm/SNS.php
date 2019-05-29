@@ -155,7 +155,7 @@ class SNS
         $cred = config('service_comm.sns.client');
         if($cred['credentials'] === false){
             $client = new Client(['base_uri' => "http://169.254.169.254/latest/meta-data/"]);
-            $result = $client->request('POST', 'iam/security-credentials/'.config('service_comm.sns.aws_role'));
+            $result = $client->request('GET', 'iam/security-credentials/'.config('service_comm.sns.aws_role'));
             $credentials = json_decode($result->getBody(),true);
             //maybe json encode
             $cred['credentials'] = [
