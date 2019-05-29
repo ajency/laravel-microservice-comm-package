@@ -151,7 +151,19 @@ class SNS
     } 
 
     public static function createInstance (){
-        $client = new SnsClient(config('service_comm.sns.client'));
+        $cred = config('service_comm.sns.client');
+        if($cred['credentials'] === false){
+            $client = new Client(['base_uri' => "http://169.254.169.254/latest/meta-data/"]);
+            $result = $client->request('POST', 'iam/security-credentials/'.config('service_comm.sns.aws_role'));
+            $credentials = json_decode($result->getBody(),true);
+            //maybe json encode
+            $cred['credentials'] = [
+                //check response
+                'key' => $credentials['AccessKeyId'],
+                'secret' => $result['SecretAccessKey']
+            ];
+        }
+        $client = new SnsClient($cred);
         return new self($client);
     }  
 
