@@ -64,3 +64,8 @@ $result = Async::call('OrderCreated',['id'=>2, 'name'=> 'ABC'],'sns',false);
 ```
 ## Read a SNS notification from the subscribed queue in SQS
 This package implements the [AWS SQS SNS Subscription Queue](https://github.com/joblocal/laravel-sqs-sns-subscription-queue) package. Please refer the readme [here](https://github.com/joblocal/laravel-sqs-sns-subscription-queue/blob/master/readme.md)
+
+
+## Using IAM Role in an EC2 instance
+If using IAM role in an EC2 instance, open `config/service_comm.php` and set the `credentials` to `false`
+Add the aws role to the config
