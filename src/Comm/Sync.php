@@ -10,6 +10,7 @@ class Sync
 {
     public static function call($microservice, $method, $params)
     {
+        getEnvHelper();
         Log::notice('Calling ' . $microservice . ' at ' . config('service_comm.url.' . $microservice));
         $start  = microtime(true);
         $client = new Client(['base_uri' => config('service_comm.url.' . $microservice)]);

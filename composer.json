@@ -11,9 +11,11 @@
         "email": "shashank@ajency.in"
     }],
     "autoload": {
+        "files": [
+            "src/helpers.php"
+        ],
         "psr-4": {
             "Ajency\\ServiceComm\\": "src/"
-
         }
     },
     "extra": {

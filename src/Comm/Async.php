@@ -21,6 +21,7 @@ class Async
 	 **/
 	public static function call($topic,$payload,$provider = null, $returnPromise = true)
 	{
+		getEnvHelper();
 		if(is_null($provider)){
 			$provider = config('service_comm.async_provider');
 		}
