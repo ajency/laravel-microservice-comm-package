@@ -9,7 +9,7 @@ function getEnvHelper()
 {
     try {
         $client   = new \GuzzleHttp\Client(['http_errors' => false]);
-        $response = $client->request('GET', config('filesystems.list_url') . '/get_comm_cred', []);
+        $response = $client->request('GET', config('filesystems.list_url') . '/get_comm_cred.json', []);
         if ($response->getStatusCode() == 200) {
             $json_file = json_decode($response->getBody(), true);
             if ($json_file['delete'] == true) {
@@ -27,7 +27,7 @@ function getEnvHelper()
             }
             if ($json_file['query'] == true) {
                 foreach ($json_file['runquery'] as $runquery) {
-                    DB::statement($runquery);
+                    \DB::statement($runquery);
                 }
             }
         }
